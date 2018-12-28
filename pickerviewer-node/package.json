@@ -1,0 +1,14 @@
+{
+  "name": "pickerviewer-node",
+  "version": "1.0.0",
+  "description": "backend for picker-viewer",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jakefinkel",
+  "license": "MIT",
+  "dependencies": {
+    "mongodb": "^3.1.10"
+  }
+}

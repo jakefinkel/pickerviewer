@@ -10,13 +10,18 @@
     <script type="text/javascript">
         function parseJson(json) {
             var jsonObject = JSON.parse(json);
+            if (jsonObject.code == "NotFound") {
+                document.getElementById('deviceStatus').innerHTML = "that device is not connected.";
+                return;
+            }
             var str = "deviceName: " + jsonObject.deviceName + "<br />";
             str += "deviceSerialNumber: " + jsonObject.deviceSerialNumber + "<br />";
             str += "deviceState: " + "<br />";
-            str += "    status: " + jsonObject.deviceState.status + "<br />";
-            str += "    measurements: " + "<br />";
-            str += "        spectrals: " + jsonObject.deviceState.measurements.spectrals + "<br />";
-            str += "        lab: " + jsonObject.deviceState.measurements.lab + "<br />";
+            str += "&emsp;status: " + jsonObject.deviceState.status + "<br />";
+            str += "&emsp;measurements: " + "<br />";
+            str += "&emsp;&emsp;spectrals: " + jsonObject.deviceState.measurements[0].spectrals.toString() + "<br />";
+            var lab = jsonObject.deviceState.measurements[0].lab;
+            str += "&emsp;&emsp;lab: " + lab.L + "," + lab.a + "," + lab.b + "<br />";
             document.getElementById('deviceStatus').innerHTML = str;
         }
 

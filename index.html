@@ -36,13 +36,19 @@
             xhr.open('get', 'https://prod-53.eastus.logic.azure.com/workflows/6cf2558aca734d9facf19cc181a4b5c7/triggers/manual/paths/invoke/' + deviceSerialNumber + '?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Vupr1dRTGZvRcghAXORgNj4S3NY4hj46xQCrBJlbQiY', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
             xhr.send();
+            if (document.getElementById("shouldRefresh").value === true) {
+                setTimeout(submit(), 1500);
+            }
         }
     </script>
 </head>
-<body>
-    Device Serial Number: <input type="text" id="deviceSerialNumber" value="1738-02085171" />
+<body style="font: courrier;">
+    Device Serial Number:&nbsp; <input type="text" id="deviceSerialNumber" value="1738-02085171" />
+    <br />
+    Refresh Device Status: <input type="checkbox" id="shouldRefresh" />
     <br />
     <input type="button" value="Get Device Status" onclick="submit();"/>
+    <br />
     <br />
     <div id="deviceStatus">
     </div>

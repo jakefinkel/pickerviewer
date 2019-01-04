@@ -27,13 +27,14 @@
 
         function submit() {
             var deviceSerialNumber = document.getElementById('deviceSerialNumber').value;
+            var trimmedDeviceSerialNumber = parseInt(deviceSerialNumber, 10).toString();
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4) {
                     parseJson(xhr.response);
                 }
             }
-            xhr.open('get', 'https://prod-53.eastus.logic.azure.com/workflows/6cf2558aca734d9facf19cc181a4b5c7/triggers/manual/paths/invoke/' + deviceSerialNumber + '?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Vupr1dRTGZvRcghAXORgNj4S3NY4hj46xQCrBJlbQiY', true);
+            xhr.open('get', 'https://prod-53.eastus.logic.azure.com/workflows/6cf2558aca734d9facf19cc181a4b5c7/triggers/manual/paths/invoke/' + trimmedDeviceSerialNumber + '?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Vupr1dRTGZvRcghAXORgNj4S3NY4hj46xQCrBJlbQiY', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
             xhr.send();
             if (document.getElementById("shouldRefresh").checked === true) {

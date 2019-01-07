@@ -19,9 +19,13 @@
             str += "deviceState: " + "<br />";
             str += "&emsp;status: " + jsonObject.deviceState.status + "<br />";
             str += "&emsp;measurements: " + "<br />";
-            str += "&emsp;&emsp;spectrals: " + jsonObject.deviceState.measurements[0].spectrals.toString() + "<br />";
-            var lab = jsonObject.deviceState.measurements[0].lab;
-            str += "&emsp;&emsp;lab: " + lab.L + "," + lab.a + "," + lab.b + "<br />";
+            var measurements = jsonObject.deviceState.measurements.array;
+            measurements.forEach(measurement => {
+                if (measurement.spectrals.length === 1) continue;
+                str += "&emsp;&emsp;spectrals: " + measurement.spectrals.toString() + "<br />";
+                var lab = measurement.lab;
+                str += "&emsp;&emsp;lab: " + lab.L + "," + lab.a + "," + lab.b + "<br />";
+            });
             document.getElementById('deviceStatus').innerHTML = str;
         }
 

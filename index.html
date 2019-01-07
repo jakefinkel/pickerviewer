@@ -11,7 +11,7 @@
         function parseJson(json) {
             var jsonObject = JSON.parse(json);
             if (jsonObject.code == "NotFound") {
-                document.getElementById('deviceStatus').innerHTML = "that device is not connected.";
+                document.getElementById("deviceStatus").innerHTML = "that device is not connected.";
                 return;
             }
             var str = "deviceName: " + jsonObject.deviceName + "<br />";
@@ -19,14 +19,14 @@
             str += "deviceState: " + "<br />";
             str += "&emsp;status: " + jsonObject.deviceState.status + "<br />";
             str += "&emsp;measurements: " + "<br />";
-            var measurements = jsonObject.deviceState.measurements.array;
-            measurements.forEach(measurement => {
+            var measurements = jsonObject.deviceState.measurements;
+            measurements.array.forEach(function (measurement) {
                 if (measurement.spectrals.length === 1) continue;
                 str += "&emsp;&emsp;spectrals: " + measurement.spectrals.toString() + "<br />";
                 var lab = measurement.lab;
                 str += "&emsp;&emsp;lab: " + lab.L + "," + lab.a + "," + lab.b + "<br />";
             });
-            document.getElementById('deviceStatus').innerHTML = str;
+            document.getElementById("deviceStatus").innerHTML = str;
         }
 
         function submit() {

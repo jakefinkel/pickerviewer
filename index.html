@@ -20,8 +20,8 @@
             str += "&emsp;status: " + jsonObject.deviceState.status + "<br />";
             str += "&emsp;measurements: " + "<br />";
             var measurements = jsonObject.deviceState.measurements;
-            measurements.array.forEach(function (measurement) {
-                if (measurement.spectrals.length === 1) continue;
+            measurements.forEach(function (measurement) {
+                if (measurement.spectrals.length === 1) { return; }
                 str += "&emsp;&emsp;spectrals: " + measurement.spectrals.toString() + "<br />";
                 var lab = measurement.lab;
                 str += "&emsp;&emsp;lab: " + lab.L + "," + lab.a + "," + lab.b + "<br />";

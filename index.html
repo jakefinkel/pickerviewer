@@ -6,7 +6,7 @@
     <title>Picker Viewer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--<link rel="stylesheet" type="text/css" media="screen" href="main.css" />-->
-    <!--<script src="main.js"></script>-->
+    <script src="labToRgb.js"></script>
     <script type="text/javascript">
         function parseJson(json) {
             var jsonObject = JSON.parse(json);
@@ -22,9 +22,11 @@
             var measurements = jsonObject.deviceState.measurements;
             measurements.forEach(function (measurement) {
                 if (measurement.spectrals.length === 1) { return; }
-                str += "&emsp;&emsp;spectrals: " + measurement.spectrals.toString() + "<br />";
-                var lab = measurement.lab;
-                str += "&emsp;&emsp;lab: " + lab.L + "," + lab.a + "," + lab.b + "<br />";
+                str += "<div style='background-color: ";
+                var rgb = convert(measurement.lab);
+                alert(rgb.R);
+                str += rgb.R + ", " + rgb.G + ", " + rgb.B;
+                str += "'></div><br />";
             });
             document.getElementById("deviceStatus").innerHTML = str;
         }

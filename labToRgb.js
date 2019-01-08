@@ -49,9 +49,6 @@ function toRgb(xyz) {
 
 function convert(lab) {
     var xyz = toXyz(lab);
-    console.info(xyz);
     var rgb = toRgb(xyz);
-    console.info(rgb);
+    return rgb;
 }
-
-convert({L: 35, a: 28, b: 13});

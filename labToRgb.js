@@ -8,6 +8,15 @@ function matrixDot (A, B) {
     });
 }
 
+function from_linear(c) {
+    var a = 0.055;
+    if (c <= 0.0031308) {
+        return 12.92 * c;
+    } else {
+        return 1.055 * Math.pow(c, 1 / 2.4) - 0.055;
+    }
+}
+
 function toXyz(lab) {
     var fY = (lab.L + 16.0) / 116.0;
     var fX = (lab.a / 500.0) + fY;
@@ -31,7 +40,10 @@ function toRgb(xyz) {
                 [0.0556434, -0.2040259, 1.0572252]];
     var xyzM = [[xyz.X], [xyz.Y], [xyz.Z]];
     var rgbM = matrixDot(invM, xyzM);
-    var rgb = {R: rgbM[0][0], G: rgbM[1][0], B: rgbM[2][0]};
+    var r = from_linear(rgbM[0][0]);
+    var g = from_linear(rgbM[1][0]);
+    var b = from_linear(rgbM[2][0]);
+    var rgb = {R: r, G: g, B: b};
     return rgb;
 }
 

@@ -7,44 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--<link rel="stylesheet" type="text/css" media="screen" href="main.css" />-->
     <!--<script src="main.js"></script>-->
-    <script type="text/javascript">
-        function parseJson(json) {
-            var jsonObject = JSON.parse(json);
-            if (jsonObject.code == "NotFound") {
-                document.getElementById('deviceStatus').innerHTML = "that device is not connected.";
-                return;
-            }
-            var str = "deviceName: " + jsonObject.deviceName + "<br />";
-            str += "deviceSerialNumber: " + jsonObject.deviceSerialNumber + "<br />";
-            str += "deviceState: " + "<br />";
-            str += "&emsp;status: " + jsonObject.deviceState.status + "<br />";
-            str += "&emsp;measurements: " + "<br />";
-            str += "&emsp;&emsp;spectrals: " + jsonObject.deviceState.measurements[0].spectrals.toString() + "<br />";
-            var lab = jsonObject.deviceState.measurements[0].lab;
-            str += "&emsp;&emsp;lab: " + lab.L + "," + lab.a + "," + lab.b + "<br />";
-            document.getElementById('deviceStatus').innerHTML = str;
-        }
-
-        function submit() {
-            var deviceSerialNumber = document.getElementById('deviceSerialNumber').value;
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    parseJson(xhr.response);
-                }
-            }
-            xhr.open('get', 'https://prod-53.eastus.logic.azure.com/workflows/6cf2558aca734d9facf19cc181a4b5c7/triggers/manual/paths/invoke/' + deviceSerialNumber + '?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Vupr1dRTGZvRcghAXORgNj4S3NY4hj46xQCrBJlbQiY', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-            xhr.send();
-        }
-    </script>
 </head>
 <body>
-    Device Serial Number: <input type="text" id="deviceSerialNumber" />
-    <br />
-    <input type="button" value="Get Device Status" onclick="submit();"/>
-    <br />
-    <div id="deviceStatus">
-    </div>
+	<script src="pantone-colorpicker.js"></script>
+	<div>
+	  <div id="pantoneColorPicker"></div>
+	</div>
 </body>
 </html>
